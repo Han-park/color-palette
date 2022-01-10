@@ -1,2 +1,2 @@
 # Custom Color Scale Generator, forked from: 
-https://chadmuro.github.io/color-scale-generator/g
+https://github.com/chadmuro/color-scale-generator/
