@@ -7,6 +7,7 @@ const number = document.getElementById('number');
 const colorContainer = document.getElementById('container');
 
 const colorContainer2 = document.getElementById('container-2');
+// const colorContainer3 = document.getElementById('container-3');
 
 // add event listeners to our color inputs to fire function when we change color
 colorOne.addEventListener('change', () => {
@@ -22,6 +23,7 @@ const generateColors = (color1, number0) => {
 	// remove any previous child nodes
 	colorContainer.innerHTML = '';
 
+	// colorContainer2.innerHTML = '';
 	colorContainer2.innerHTML = '';
 
 	// get array of colors from chroma.js
@@ -29,10 +31,15 @@ const generateColors = (color1, number0) => {
 
 	const color1Hue = chroma(color1).hsl()[0];
 
-	// console.log(chroma(color1).hsl());
+	console.log(chroma({h: (chroma(color1).hsl()[0]+180) % 360, s: chroma(color1).hsl()[1], l: chroma(color1).hsl()[2]}));
+	// console.log(chroma(color1).lch());
+	console.log(colorPalette);
+	// console.log(chroma.hsl(330, 1, 0.6).hex());
+	// console.log(chroma('#ff3399'));
 
-	const colorHelix = chroma.cubehelix().start(color1Hue).lightness(0.5);
-	const colorPalette2 = chroma.scale(colorHelix).colors(number0);
+	const colorHelix = chroma.cubehelix().start(color1Hue);
+	// const colorPalette2 = chroma.scale(colorHelix).colors(6);
+	
 
 	colorPalette.forEach(color => {
 		// create a div for each color
@@ -45,7 +52,28 @@ const generateColors = (color1, number0) => {
 		colorContainer.appendChild(colorItem);
 	});
 
-	colorPalette2.forEach(color => {
+	// colorPalette2.forEach(color => {
+	// 	// create a div for each color
+	// 	const colorItem = document.createElement('div');
+	// 	// add a class to each div
+	// 	colorItem.classList.add('container-item');
+	// 	// give each div a background color
+	// 	colorItem.style.background = color;
+	// 	// append the div to the container
+	// 	colorContainer2.appendChild(colorItem);
+	// });
+
+const hueNum = 6;
+
+let hueVariation = [];
+const hueInterval = 360 / hueNum;
+
+	for(i=0; i < hueNum; i++){
+		hueVariation.push(chroma.hsl((chroma(color1).hsl()[0]+ (hueInterval* (i+1) ) ) % 360, chroma(color1).hsl()[1], chroma(color1).hsl()[2]).hex());
+	}
+	console.log(hueVariation);
+
+	hueVariation.forEach(color => {
 		// create a div for each color
 		const colorItem = document.createElement('div');
 		// add a class to each div
@@ -55,6 +83,8 @@ const generateColors = (color1, number0) => {
 		// append the div to the container
 		colorContainer2.appendChild(colorItem);
 	});
+
+		
 
 };
 
