@@ -39,7 +39,7 @@ const generateColors = (color1, number0) => {
 
 	hueVariation.forEach(color => {
 
-		const colorPalette = chroma.scale(['white', color, 'black']).correctLightness().colors(number0);
+		const colorPalette = chroma.scale(['white', color, 'black']).colors(number0);
 
 		// create a div for each color
 		const colorItem0 = document.createElement('div');
